@@ -1,8 +1,3 @@
-resource "ibm_is_security_group" "consul_security_group" {
-  name = "consul-sg"
-  vpc  = ibm_is_vpc.consul_vpc.id
-}
-
 resource "ibm_is_security_group" "bastion_security_group" {
   name = "vpc-secure-bastion-sg"
   vpc  = ibm_is_vpc.consul_vpc.id
@@ -19,7 +14,7 @@ resource "ibm_is_security_group_rule" "bastion_security_group_rule_icmp" {
 
 }
 
-resource "ibm_is_security_group_rule" "bastion_ssh_access_inbound" {
+resource "ibm_is_security_group_rule" "bastion_security_group_rule_ssh_inbound" {
   depends_on = [ibm_is_security_group.bastion_security_group]
   group      = ibm_is_security_group.bastion_security_group.id
   direction  = "inbound"
