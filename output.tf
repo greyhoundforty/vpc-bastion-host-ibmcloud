@@ -3,5 +3,5 @@ output "bastion_floating_ip" {
 }
 
 output "vpc_id" {
-  value = ibm_is_vpc.consul_vpc.id
+  value = ibm_is_vpc.default_rt_vpc.id
 }

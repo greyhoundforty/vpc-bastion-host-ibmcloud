@@ -9,7 +9,6 @@ resource "ibm_is_security_group_rule" "vpc_secure_bastion_sg_icmp" {
   direction  = "inbound"
   remote     = "0.0.0.0/0"
   icmp {
-    code = ""
     type = 8
   }
 }
@@ -27,7 +26,7 @@ resource "ibm_is_security_group_rule" "vpc_secure_bastion_sg_ssh_inbound" {
 
 resource "ibm_is_security_group" "vpc_secure_maintenance_sg" {
   name = "vpc-secure-maintenance-sg"
-  vpc  = ibm_is_vpc.consul_vpc.id
+  vpc  = ibm_is_vpc.default_rt_vpc.id
 }
 
 

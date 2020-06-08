@@ -1,9 +1,9 @@
 resource "ibm_is_public_gateway" "z1_gateway" {
-  name           = "z1-public-gateway"
+  name           = "z1-bastion-pubgw"
   vpc            = ibm_is_vpc.default_rt_vpc.id
   zone           = "${var.region}-1"
   resource_group = data.ibm_resource_group.cde_resource_group.id
-  tags           = [random_id.vpc_name.hex, "ryantiffany"]
+  tags           = ["ryantiffany"]
 }
 
 resource "ibm_is_subnet" "z1_bastion_subnet" {
@@ -16,7 +16,7 @@ resource "ibm_is_subnet" "z1_bastion_subnet" {
 }
 
 resource "ibm_is_floating_ip" "bastion_floatingip" {
-  name   = "bastion-${random_id.vpc_name.hex}-fip"
+  name   = "z1-bastion-${var.vpc_name}-fip"
   target = ibm_is_instance.bastion_instance.primary_network_interface[0].id
 }
 

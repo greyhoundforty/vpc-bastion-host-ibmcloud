@@ -16,9 +16,9 @@ resource "ibm_is_instance" "bastion_instance" {
   }
 
   resource_group = data.ibm_resource_group.cde_resource_group.id
-  tags           = [random_id.vpc_name.hex, "ryantiffany"]
+  tags           = ["ryantiffany"]
 
-  vpc  = ibm_is_vpc.consul_vpc.id
+  vpc  = ibm_is_vpc.default_rt_vpc.id
   zone = "${var.region}-1"
   keys = [data.ibm_is_ssh_key.us_south_tycho_key.id]
 }
