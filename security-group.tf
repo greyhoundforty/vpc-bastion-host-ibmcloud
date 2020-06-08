@@ -1,6 +1,6 @@
 resource "ibm_is_security_group" "vpc_secure_bastion_sg" {
   name = "vpc-secure-bastion-sg"
-  vpc  = ibm_is_vpc.consul_vpc.id
+  vpc  = ibm_is_vpc.default_rt_vpc.id
 }
 
 resource "ibm_is_security_group_rule" "vpc_secure_bastion_sg_icmp" {

@@ -1,5 +1,11 @@
+variable "vpc_name" {
+  description = "Name of the VPC to create."
+  type        = string
+  default     = ""
+}
+
 variable "region" {
-  description = "IBM Cloud region to deploy VPC resources. Default is us-south."
+  description = "IBM Cloud region to deploy VPC resources. Currently supported regions: eu-de, eu-gb, us-east, us-south. Default is us-south."
   type        = string
   default     = "us-south"
 }
@@ -11,7 +17,7 @@ variable "instance_count" {
 }
 
 variable "os_image_name" {
-  description = "Operating System image of the instance. Default is Ubuntu 18 (ibm-ubuntu-18-04-1-minimal-amd64-1)."
+  description = "Operating System image of the instance. Default is Ubuntu 18."
   type        = string
   default     = "ibm-ubuntu-18-04-1-minimal-amd64-1"
 }

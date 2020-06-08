@@ -1,16 +1,12 @@
-resource "random_id" "vpc_name" {
-  byte_length = 4
-}
-
-resource "ibm_is_vpc" "consul_vpc" {
-  name                      = "vpc-${random_id.vpc_name.hex}"
+resource "ibm_is_vpc" "default_rt_vpc" {
+  name                      = var.vpc_name
   resource_group            = data.ibm_resource_group.cde_resource_group.id
   address_prefix_management = var.use_default_prefixes
-  tags                      = [random_id.vpc_name.hex, "ryantiffany"]
+  tags                      = ["ryantiffany", var.region]
 }
 
 resource "ibm_is_instance" "bastion_instance" {
-  name    = "bastion-${random_id.vpc_name.hex}"
+  name    = "bastion-${var.vpc_name}"
   image   = data.ibm_is_image.u18_image.id
   profile = var.instance_profile
 
