@@ -29,7 +29,7 @@ resource "ibm_is_security_group" "vpc_secure_maintenance_sg" {
   vpc  = ibm_is_vpc.default_rt_vpc.id
 }
 
-resource "ibm_is_security_group_rule" "vpc_secure_maintenance_sg_tcp_dns_inbound" {
+resource "ibm_is_security_group_rule" "vpc_secure_maintenance_sg_tcp_dns_outbound" {
   depends_on = [ibm_is_security_group.vpc_secure_maintenance_sg]
   group      = ibm_is_security_group.vpc_secure_maintenance_sg.id
   direction  = "outbound"
@@ -73,16 +73,6 @@ resource "ibm_is_security_group_rule" "vpc_secure_maintenance_sg_tcp_https_outbo
   }
 }
 
-resource "ibm_is_security_group_rule" "vpc_secure_maintenance_sg_tcp_https_outbound" {
-  depends_on = [ibm_is_security_group.vpc_secure_maintenance_sg]
-  group      = ibm_is_security_group.vpc_secure_maintenance_sg.id
-  direction  = "inbound"
-  remote     = "0.0.0.0/0"
-  tcp {
-    port_min = "443"
-    port_max = "443"
-  }
-}
 
 resource "ibm_is_security_group_rule" "vpc_secure_maintenance_sg_ssh_inbound" {
   depends_on = [ibm_is_security_group.vpc_secure_maintenance_sg]

@@ -11,9 +11,9 @@ variable "region" {
 }
 
 variable "instance_count" {
-  description = "Instances to deploy per zone. Default is 1."
+  description = "Instances to deploy per zone. Default is 3."
   type        = string
-  default     = "1"
+  default     = "3"
 }
 
 variable "os_image_name" {
