@@ -9,3 +9,9 @@ data "ibm_is_image" "u18_image" {
 data "ibm_is_ssh_key" "us_south_tycho_key" {
   name = "tycho-ng"
 }
+
+
+
+data "ibm_is_ssh_key" "us_south_hyperion_key" {
+  name = "ryan-hyperion-gen2"
+}

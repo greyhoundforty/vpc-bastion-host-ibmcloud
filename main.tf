@@ -20,5 +20,24 @@ resource "ibm_is_instance" "bastion_instance" {
 
   vpc  = ibm_is_vpc.default_rt_vpc.id
   zone = "${var.region}-1"
-  keys = [data.ibm_is_ssh_key.us_south_tycho_key.id]
+  keys = [data.ibm_is_ssh_key.us_south_tycho_key.id, data.ibm_is_ssh_key.us_south_hyperion_key.id]
+}
+
+resource "ibm_is_instance" "web_instances" {
+  count   = var.node_count
+  name    = "web-${count.index + 1}-${var.vpc_name}-instance"
+  image   = data.ibm_is_image.u18_image.id
+  profile = var.instance_profile
+
+  primary_network_interface {
+    subnet          = ibm_is_subnet.z1_private_subnet.id
+    security_groups = [ibm_is_security_group.vpc_secure_maintenance_sg.id]
+  }
+
+  resource_group = data.ibm_resource_group.cde_resource_group.id
+  tags           = ["ryantiffany"]
+
+  vpc  = ibm_is_vpc.default_rt_vpc.id
+  zone = "${var.region}-1"
+  keys = [data.ibm_is_ssh_key.us_south_tycho_key.id, data.ibm_is_ssh_key.us_south_hyperion_key.id]
 }
