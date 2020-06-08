@@ -1,22 +1,22 @@
-resource "ibm_is_security_group" "bastion_security_group" {
+resource "ibm_is_security_group" "vpc_secure_bastion_sg" {
   name = "vpc-secure-bastion-sg"
   vpc  = ibm_is_vpc.consul_vpc.id
 }
 
-resource "ibm_is_security_group_rule" "bastion_security_group_rule_icmp" {
-  group     = ibm_is_security_group.testacc_security_group.id
-  direction = "inbound"
-  remote    = "0.0.0.0/0"
+resource "ibm_is_security_group_rule" "vpc_secure_bastion_sg_icmp" {
+  depends_on = [ibm_is_security_group.vpc_secure_bastion_sg]
+  group      = ibm_is_security_group.vpc_secure_bastion_sg.id
+  direction  = "inbound"
+  remote     = "0.0.0.0/0"
   icmp {
     code = ""
     type = 8
   }
-
 }
 
-resource "ibm_is_security_group_rule" "bastion_security_group_rule_ssh_inbound" {
-  depends_on = [ibm_is_security_group.bastion_security_group]
-  group      = ibm_is_security_group.bastion_security_group.id
+resource "ibm_is_security_group_rule" "vpc_secure_bastion_sg_ssh_inbound" {
+  depends_on = [ibm_is_security_group.vpc_secure_bastion_sg]
+  group      = ibm_is_security_group.vpc_secure_bastion_sg.id
   direction  = "inbound"
   remote     = "0.0.0.0/0"
   tcp {
@@ -25,5 +25,9 @@ resource "ibm_is_security_group_rule" "bastion_security_group_rule_ssh_inbound" 
   }
 }
 
+resource "ibm_is_security_group" "vpc_secure_maintenance_sg" {
+  name = "vpc-secure-maintenance-sg"
+  vpc  = ibm_is_vpc.consul_vpc.id
+}
 
 

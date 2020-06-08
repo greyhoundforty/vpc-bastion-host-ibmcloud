@@ -6,6 +6,6 @@ data "ibm_is_image" "u18_image" {
   name = var.os_image_name
 }
 
-data "ibm_is_ssh_key" "us_south__tycho_key" {
+data "ibm_is_ssh_key" "us_south_tycho_key" {
   name = "tycho-ng"
 }

@@ -10,13 +10,13 @@ resource "ibm_is_vpc" "consul_vpc" {
 }
 
 resource "ibm_is_instance" "bastion_instance" {
-  name    = "bastion"
+  name    = "bastion-${random_id.vpc_name.hex}"
   image   = data.ibm_is_image.u18_image.id
   profile = var.instance_profile
 
   primary_network_interface {
     subnet          = ibm_is_subnet.z1_bastion_subnet.id
-    security_groups = [ibm_is_security_group.bastion_security_group.id]
+    security_groups = [ibm_is_security_group.vpc_secure_bastion_sg.id]
   }
 
   resource_group = data.ibm_resource_group.cde_resource_group.id
@@ -24,5 +24,5 @@ resource "ibm_is_instance" "bastion_instance" {
 
   vpc  = ibm_is_vpc.consul_vpc.id
   zone = "${var.region}-1"
-  keys = [data.ibm_is_ssh_key.us_south__tycho_key.id]
+  keys = [data.ibm_is_ssh_key.us_south_tycho_key.id]
 }

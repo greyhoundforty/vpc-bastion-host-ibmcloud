@@ -29,7 +29,7 @@ variable "domain" {
 }
 
 variable "use_default_prefixes" {
-  description = "Use the Zone default prefixes (auto) or create your own (manual). Default is manual."
+  description = "Use the Zone default prefixes (auto) or create your own (manual). Default is auto."
   type        = string
   default     = "auto"
 }
