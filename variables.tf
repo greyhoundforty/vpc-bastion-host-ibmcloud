@@ -34,12 +34,6 @@ variable "domain" {
   default     = "cdetesting.com"
 }
 
-variable "use_default_prefixes" {
-  description = "Use the Zone default prefixes (auto) or create your own (manual). Default is auto."
-  type        = string
-  default     = "auto"
-}
-
 variable "resource_group_name" {
   description = "The Resource group that resources will get provisioned in to."
   type        = string

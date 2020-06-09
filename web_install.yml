@@ -19,7 +19,7 @@ packages:
     - unzip
     - jq
     - git
-    - nginx
+    - apache2
 snap:
     commands:
       00: snap install yq

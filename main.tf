@@ -1,8 +1,7 @@
 resource "ibm_is_vpc" "default_rt_vpc" {
-  name                      = var.vpc_name
-  resource_group            = data.ibm_resource_group.default.id
-  address_prefix_management = var.use_default_prefixes
-  tags                      = ["ryantiffany", var.region]
+  name           = var.vpc_name
+  resource_group = data.ibm_resource_group.default.id
+  tags           = ["ryantiffany", var.region, var.vpc_name]
 }
 
 resource "ibm_is_instance" "bastion_instance" {
@@ -21,7 +20,7 @@ resource "ibm_is_instance" "bastion_instance" {
   vpc       = ibm_is_vpc.default_rt_vpc.id
   zone      = "${var.region}-1"
   keys      = [data.ibm_is_ssh_key.ssh_key.id]
-  user_data = file("install.yml")
+  user_data = file("basic_install.yml")
 }
 
 resource "ibm_is_instance" "web_instances" {
@@ -41,7 +40,7 @@ resource "ibm_is_instance" "web_instances" {
   vpc       = ibm_is_vpc.default_rt_vpc.id
   zone      = "${var.region}-1"
   keys      = [data.ibm_is_ssh_key.ssh_key.id]
-  user_data = file("install.yml")
+  user_data = file("web_install.yml")
 }
 
 # module "web-instances" {
