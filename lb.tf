@@ -25,7 +25,7 @@ resource "ibm_is_lb_pool" "web_pool" {
 }
 
 resource "ibm_is_lb_pool_member" "web_lb_member1" {
-  depends_on     = [ibm_is_lb_pool.web_pool.id]
+  depends_on     = [ibm_is_lb_pool.web_pool]
   lb             = ibm_is_lb.web_lb.id
   pool           = ibm_is_lb_pool.web_pool.id
   port           = 8080
@@ -34,7 +34,7 @@ resource "ibm_is_lb_pool_member" "web_lb_member1" {
 }
 
 resource "ibm_is_lb_pool_member" "web_lb_member2" {
-  depends_on     = [ibm_is_lb_pool.web_pool.id]
+  depends_on     = [ibm_is_lb_pool.web_pool]
   lb             = ibm_is_lb.web_lb.id
   pool           = ibm_is_lb_pool.web_pool.id
   port           = 8080
@@ -43,7 +43,7 @@ resource "ibm_is_lb_pool_member" "web_lb_member2" {
 }
 
 resource "ibm_is_lb_pool_member" "web_lb_member3" {
-  depends_on     = [ibm_is_lb_pool.web_pool.id]
+  depends_on     = [ibm_is_lb_pool.web_pool]
   lb             = ibm_is_lb.web_lb.id
   pool           = ibm_is_lb_pool.web_pool.id
   port           = 8080
