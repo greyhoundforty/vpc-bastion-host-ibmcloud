@@ -25,7 +25,7 @@ resource "ibm_is_instance" "bastion_instance" {
 }
 
 resource "ibm_is_instance" "web_instances" {
-  count   = var.node_count
+  count   = var.instance_count
   name    = "web-${count.index + 1}-${var.vpc_name}-instance"
   image   = data.ibm_is_image.u18_image.id
   profile = var.instance_profile
