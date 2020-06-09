@@ -1,13 +1,13 @@
 resource "ibm_is_security_group" "vpc_secure_bastion_sg" {
   name           = "vpc-secure-bastion-sg"
   vpc            = ibm_is_vpc.default_rt_vpc.id
-  resource_group = data.ibm_resource_group.cde_resource_group.id
+  resource_group = data.ibm_resource_group.default.id
 }
 
 resource "ibm_is_security_group" "vpc_secure_maintenance_sg" {
   name           = "vpc-secure-maintenance-sg"
   vpc            = ibm_is_vpc.default_rt_vpc.id
-  resource_group = data.ibm_resource_group.cde_resource_group.id
+  resource_group = data.ibm_resource_group.default.id
 }
 
 

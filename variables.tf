@@ -49,5 +49,5 @@ variable "resource_group_name" {
 variable "ssh_key_name" {
   description = "Name of SSH key already added to VPC."
   type        = string
-  default     = ""  
+  default     = ""
 }

@@ -1,14 +1,14 @@
 resource "ibm_is_public_gateway" "z1_gateway" {
   name           = "z1-pubgw"
+  resource_group = data.ibm_resource_group.default.id
   vpc            = ibm_is_vpc.default_rt_vpc.id
   zone           = "${var.region}-1"
-  resource_group = data.ibm_resource_group.cde_resource_group.id
-  tags           = ["ryantiffany"]
+  tags           = ["ryantiffany", var.vpc_name]
 }
 
 resource "ibm_is_subnet" "vpc_secure_bastion_subnet" {
-  resource_group  = data.ibm_resource_group.cde_resource_group.id
   name            = "vpc-secure-bastion-subnet"
+  resource_group  = data.ibm_resource_group.default.id
   vpc             = ibm_is_vpc.default_rt_vpc.id
   zone            = "${var.region}-1"
   ipv4_cidr_block = "10.240.0.0/24"
@@ -21,8 +21,8 @@ resource "ibm_is_floating_ip" "bastion_floatingip" {
 }
 
 resource "ibm_is_subnet" "vpc_secure_private_subnet" {
-  resource_group  = data.ibm_resource_group.cde_resource_group.id
   name            = "vpc-secure-private-subnet"
+  resource_group  = data.ibm_resource_group.default.id
   vpc             = ibm_is_vpc.default_rt_vpc.id
   zone            = "${var.region}-1"
   ipv4_cidr_block = "10.240.1.0/24"

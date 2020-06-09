@@ -1,6 +1,6 @@
 resource "ibm_is_vpc" "default_rt_vpc" {
   name                      = var.vpc_name
-  resource_group            = data.ibm_resource_group.cde_resource_group.id
+  resource_group            = data.ibm_resource_group.default.id
   address_prefix_management = var.use_default_prefixes
   tags                      = ["ryantiffany", var.region]
 }
@@ -15,7 +15,7 @@ resource "ibm_is_instance" "bastion_instance" {
     security_groups = [ibm_is_security_group.vpc_secure_bastion_sg.id]
   }
 
-  resource_group = data.ibm_resource_group.cde_resource_group.id
+  resource_group = data.ibm_resource_group.default.id
   tags           = ["ryantiffany", var.vpc_name]
 
   vpc       = ibm_is_vpc.default_rt_vpc.id
@@ -35,7 +35,7 @@ resource "ibm_is_instance" "web_instances" {
     security_groups = [ibm_is_security_group.vpc_secure_maintenance_sg.id]
   }
 
-  resource_group = data.ibm_resource_group.cde_resource_group.id
+  resource_group = data.ibm_resource_group.default.id
   tags           = ["ryantiffany", var.vpc_name]
 
   vpc       = ibm_is_vpc.default_rt_vpc.id

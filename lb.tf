@@ -1,7 +1,7 @@
 resource "ibm_is_lb" "web_lb" {
   name           = "web-lb-dev-rt"
   subnets        = [ibm_is_subnet.vpc_secure_private_subnet.id]
-  resource_group = data.ibm_resource_group.cde_resource_group.id
+  resource_group = data.ibm_resource_group.default.id
   tags           = ["ryantiffany", var.vpc_name]
 }
 
