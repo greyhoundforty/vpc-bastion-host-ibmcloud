@@ -29,3 +29,6 @@ resource "ibm_is_subnet" "z1_private_subnet" {
   public_gateway  = ibm_is_public_gateway.z1_gateway.id
 }
 
+
+
+
