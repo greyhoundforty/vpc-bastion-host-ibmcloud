@@ -1,5 +1,5 @@
 resource "ibm_is_lb" "web_lb" {
-  name           = "web-lb-dev-rt"
+  name           = "${var.vpc_name}-web-loadbalancer"
   subnets        = [ibm_is_subnet.vpc_secure_private_subnet.id]
   resource_group = data.ibm_resource_group.default.id
   tags           = ["ryantiffany", var.vpc_name]
@@ -14,7 +14,7 @@ resource "ibm_is_lb_listener" "web_lb_listener" {
 
 resource "ibm_is_lb_pool" "web_pool" {
   depends_on     = [ibm_is_lb.web_lb]
-  name           = "web-pool"
+  name           = "${var.vpc_name}-web-lb-pool"
   lb             = ibm_is_lb.web_lb.id
   algorithm      = "round_robin"
   protocol       = "http"
