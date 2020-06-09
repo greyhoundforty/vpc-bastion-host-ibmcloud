@@ -19,6 +19,7 @@ packages:
     - unzip
     - jq
     - git
+    - nginx
 snap:
     commands:
       00: snap install yq
