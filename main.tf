@@ -20,7 +20,7 @@ resource "ibm_is_instance" "bastion_instance" {
 
   vpc       = ibm_is_vpc.default_rt_vpc.id
   zone      = "${var.region}-1"
-  keys      = [data.ibm_is_ssh_key.us_south_tycho_key.id, data.ibm_is_ssh_key.us_south_hyperion_key.id]
+  keys      = [data.ibm_is_ssh_key.ssh_key.id]
   user_data = file("install.yml")
 }
 
@@ -40,7 +40,7 @@ resource "ibm_is_instance" "web_instances" {
 
   vpc       = ibm_is_vpc.default_rt_vpc.id
   zone      = "${var.region}-1"
-  keys      = [data.ibm_is_ssh_key.us_south_tycho_key.id, data.ibm_is_ssh_key.us_south_hyperion_key.id]
+  keys      = [data.ibm_is_ssh_key.ssh_key.id]
   user_data = file("install.yml")
 }
 

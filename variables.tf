@@ -40,3 +40,8 @@ variable "use_default_prefixes" {
   default     = "auto"
 }
 
+variable "resource_group_name" {
+  description = "The Resource group that resources will get provisioned in to."
+  type        = string
+  default     = ""
+}
