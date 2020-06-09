@@ -6,11 +6,11 @@ resource "ibm_is_lb" "web_lb" {
 }
 
 resource "ibm_is_lb_listener" "web_lb_listener" {
-  depends_on = [ibm_is_lb.web_lb]
-  lb         = ibm_is_lb.web_lb.id
-  pool       = ibm_is_lb_pool.web_pool.id
-  port       = "80"
-  protocol   = "http"
+  depends_on   = [ibm_is_lb.web_lb]
+  lb           = ibm_is_lb.web_lb.id
+  default_pool = ibm_is_lb_pool.web_pool.id
+  port         = "80"
+  protocol     = "http"
 }
 
 resource "ibm_is_lb_pool" "web_pool" {
