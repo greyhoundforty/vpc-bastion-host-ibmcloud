@@ -26,9 +26,9 @@ resource "ibm_is_lb_pool" "web_pool" {
 }
 
 resource "ibm_is_lb_pool_member" "web_lb_member1" {
-  depends_on = [ibm_is_lb_pool.web_pool]
-  lb         = ibm_is_lb.web_lb.id
-
+  depends_on     = [ibm_is_lb_pool.web_pool]
+  lb             = ibm_is_lb.web_lb.id
+  pool           = ibm_is_lb_pool.web_pool.id
   port           = 80
   target_address = ibm_is_instance.web_instances[0].primary_network_interface[0].primary_ipv4_address
   weight         = 60
