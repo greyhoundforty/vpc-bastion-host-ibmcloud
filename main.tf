@@ -11,12 +11,12 @@ resource "ibm_is_instance" "bastion_instance" {
   profile = var.instance_profile
 
   primary_network_interface {
-    subnet          = ibm_is_subnet.z1_bastion_subnet.id
+    subnet          = ibm_is_subnet.vpc_secure_bastion_subnet.id
     security_groups = [ibm_is_security_group.vpc_secure_bastion_sg.id]
   }
 
   resource_group = data.ibm_resource_group.cde_resource_group.id
-  tags           = ["ryantiffany"]
+  tags           = ["ryantiffany", var.vpc_name]
 
   vpc       = ibm_is_vpc.default_rt_vpc.id
   zone      = "${var.region}-1"
@@ -31,12 +31,12 @@ resource "ibm_is_instance" "web_instances" {
   profile = var.instance_profile
 
   primary_network_interface {
-    subnet          = ibm_is_subnet.z1_private_subnet.id
+    subnet          = ibm_is_subnet.vpc_secure_private_subnet.id
     security_groups = [ibm_is_security_group.vpc_secure_maintenance_sg.id]
   }
 
   resource_group = data.ibm_resource_group.cde_resource_group.id
-  tags           = ["ryantiffany"]
+  tags           = ["ryantiffany", var.vpc_name]
 
   vpc       = ibm_is_vpc.default_rt_vpc.id
   zone      = "${var.region}-1"

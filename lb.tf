@@ -5,13 +5,15 @@ resource "ibm_is_lb" "web_lb" {
   tags           = ["ryantiffany", var.vpc_name]
 }
 
-resource "ibm_is_lb_listener" "testacc_lb_listener" {
-  lb       = ibm_is_lb.web_lb.id
-  port     = "80"
-  protocol = "http"
+resource "ibm_is_lb_listener" "web_lb_listener" {
+  depends_on = [ibm_is_lb.web_lb]
+  lb         = ibm_is_lb.web_lb.id
+  port       = "80"
+  protocol   = "http"
 }
 
 resource "ibm_is_lb_pool" "web_pool" {
+  depends_on     = [ibm_is_lb.web_lb]
   name           = "web-pool"
   lb             = ibm_is_lb.web_lb.id
   algorithm      = "round_robin"
@@ -22,7 +24,8 @@ resource "ibm_is_lb_pool" "web_pool" {
   health_type    = "http"
 }
 
-resource "ibm_is_lb_pool_member" "testacc_lb_1" {
+resource "ibm_is_lb_pool_member" "web_lb_member1" {
+  depends_on     = [ibm_is_lb_pool.web_pool.id]
   lb             = ibm_is_lb.web_lb.id
   pool           = ibm_is_lb_pool.web_pool.id
   port           = 8080
@@ -30,7 +33,8 @@ resource "ibm_is_lb_pool_member" "testacc_lb_1" {
   weight         = 60
 }
 
-resource "ibm_is_lb_pool_member" "testacc_lb_2" {
+resource "ibm_is_lb_pool_member" "web_lb_member2" {
+  depends_on     = [ibm_is_lb_pool.web_pool.id]
   lb             = ibm_is_lb.web_lb.id
   pool           = ibm_is_lb_pool.web_pool.id
   port           = 8080
@@ -38,7 +42,8 @@ resource "ibm_is_lb_pool_member" "testacc_lb_2" {
   weight         = 60
 }
 
-resource "ibm_is_lb_pool_member" "testacc_lb_3" {
+resource "ibm_is_lb_pool_member" "web_lb_member3" {
+  depends_on     = [ibm_is_lb_pool.web_pool.id]
   lb             = ibm_is_lb.web_lb.id
   pool           = ibm_is_lb_pool.web_pool.id
   port           = 8080
