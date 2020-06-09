@@ -1,5 +1,4 @@
 data "ibm_resource_group" "default" {
-  type = string
   name = var.resource_group_name
 }
 
