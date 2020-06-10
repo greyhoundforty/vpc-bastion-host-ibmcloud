@@ -1,7 +1,7 @@
 resource "ibm_is_lb" "web_lb" {
   name           = "${var.vpc_name}-web-loadbalancer"
   subnets        = [ibm_is_subnet.vpc_secure_private_subnet.id]
-  resource_group = data.ibm_resource_group.default.id
+  resource_group = module.vpc.resource_group_id
   tags           = ["ryantiffany", var.vpc_name]
 }
 

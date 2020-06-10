@@ -1,7 +1,3 @@
-data "ibm_resource_group" "default" {
-  name = var.resource_group_name
-}
-
 data "ibm_is_image" "u18_image" {
   name = var.os_image_name
 }
